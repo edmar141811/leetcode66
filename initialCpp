@@ -1,0 +1,51 @@
+/*
+Runtime 0 ms
+Beats 100.00%
+
+Memory 11.58 MB
+Beats 45.89%
+
+I feel like the runtime is most likely off since I think there could be some major improvements
+
+*/
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        //initialization of variables
+        int currP=0;
+        int lastPlace = (digits.size()-1); 
+        int sLast = (digits.size()-2);
+        //in the scenario that 9 needs to roll over
+        if(digits[lastPlace]==9){
+            if(digits.size()==1){
+                digits[lastPlace] = 0; 
+                digits.insert(digits.begin(), 1);
+            }
+            else{
+                currP = lastPlace;
+                //loops through available size
+                while( 0 <= currP){
+                    //gives most options of roll over, if not, then continues
+                    if(digits[currP]==9 && currP!=0){
+                        digits[currP]=0;
+                        currP--;
+                    }
+                    else if(digits[currP]!=9){
+                        digits[currP]= digits[currP]+1;
+                        break;
+                    }
+                    else if(currP==0 && digits[currP]==9){
+                        digits[currP]=0;
+                        digits.insert(digits.begin(), 1);
+                        break;
+                    }
+
+                }
+            }
+        }
+        else{
+            digits[lastPlace]= digits[lastPlace]+1;
+        }
+        return digits;
+    }
+};
